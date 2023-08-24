@@ -103,7 +103,6 @@ const generateBetter = (x=100,y=100) => {
     const { createCanvas } = require('canvas');
     const { createNoise2D } = require('simplex-noise');
 
-
     const canvas = createCanvas(x, y);
     const context = canvas.getContext('2d');
     const noise2D = createNoise2D();
@@ -112,7 +111,7 @@ const generateBetter = (x=100,y=100) => {
         for (let xindex = 0; xindex < x; xindex++) {
             const noise = noise2D(xindex, yindex)
 
-            console.log(xindex, yindex, noise)
+            
 
             context.fillStyle = map(noise);
             context.fillRect(yindex, xindex, 1, 1);
@@ -130,32 +129,80 @@ const generateBetter = (x=100,y=100) => {
 
 const map = (height) => {
 
-    if (height > 1) {
-        return '#cc2828'
+    if (height > 0.8400) {
+        return '#fafafa'
+    } else if (height > 0.7670 && height < 0.8400) {
+        return '#fab49b'
+    } else if (height > 0.6940 && height < 0.7670) {
+        return '#fa5e5f'
+    } else if (height > 0.6210 && height < 0.6940) {
+        return '#fe0000'
+    } else if (height > 0.5480 && height < 0.6210) {
+        return '#e74600'
+    } else if (height > 0.4750 && height < 0.5480) {
+        return '#fa8c00'
+    } else if (height > 0.4020 && height < 0.4750) {
+        return '#fee60a'
+    } else if (height > 0.3290 && height < 0.4020) {
+        return '#e6aa14'
+    } else if (height > 0.2560 && height < 0.3290) {
+        return '#be831f'
+    } else if (height > 0.2240 && height < 0.2560) {
+        return '#9f6418'
+    } else if (height > 0.1920 && height < 0.2240) {
+        return '#825015'
+    } else if (height > 0.1600 && height < 0.1920) {
+        return '#4b2f23'
+    } else if (height > 0.1280 && height < 0.1600) {
+        return '#63643c'
+    } else if (height > 0.0960 && height < 0.1280) {
+        return '#789656'
+    } else if (height > 0.0640 && height < 0.0960) {
+        return '#5aaf4a'
+    } else if (height > 0.0320 && height < 0.0640) {
+        return '#42c84b'
+    } else if (height > 0 && height < 0.0320) {
+        return '#96dc96'
+    } else if (height < 0 && height > -0.0320) {
+        return '#d2dcd3'
+    } else if (height < -0.0320 && height > -0.0640) {
+        return '#abbedc'
+    } else if (height < -0.0640 && height > -0.0960) {
+        return '#79bedd'
+    } else if (height < -0.0960 && height > -0.1280) {
+        return '#3dbedd'
+    } else if (height < -0.1280 && height > -0.1600) {
+        return '#5ae1f5'
+    } else if (height < -0.1600 && height > -0.1920) {
+        return '#21dfff'
+    } else if (height < -0.1920 && height > -0.2240) {
+        return '#20beff'
+    } else if (height < -0.2240 && height > -0.2560) {
+        return '#2096f0'
+    } else if (height < -0.2560 && height > -0.3290) {
+        return '#0f6edc'
+    } else if (height < -0.3290 && height > -0.4020) {
+        return '#1040c8'
+    } else if (height < -0.4020 && height > -0.4750) {
+        return '#2010c8'
+    } else if (height < -0.4750 && height > -0.5480) {
+        return '#501e91'
+    } else if (height < -0.5480 && height > -0.6210) {
+        return '#864fb5'
+    } else if (height < -0.6210 && height > -0.6940) {
+        return '#aa71d8'
+    } else if (height < -0.6940 && height > -0.7670) {
+        return '#bd6e9e'
+    } else if (height < -0.7670 && height > -0.8200) {
+        return '#d97ace'
+    } else if (height < -0.8200) {
+        return '#202020'
     }
+    
+    
 
     return '#ffffff'
 
-    switch (height) {
-        case 0:
-            return '#7a28cc';
-        case 1:
-            return '#2828cc';
-        case 2:
-            return '#287acc';
-        case 3:
-            return '#28cccc';
-        case 4:
-            return '#28cc7a';
-        case 5:
-            return '#28cc28';
-        case 6:
-            return '#cccc28';
-        case 7:
-            return '#cc7a28';
-        default:
-            return '#cc2828';
-    }
 }
 
 //const frame = generateFrame(64*100,64*100)
