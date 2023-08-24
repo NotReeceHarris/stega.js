@@ -201,7 +201,7 @@ const map = (height) => {
 //console.log(displayFrame(noisy, map))
 //console.log(displayFrame(smooth, map))
 
-function interpolate(map, intensity) {
+const interpolate = (map, intensity) => {
     for (let i = 0; i < intensity; i++) {
         for (let y = 0; y < map.length; y++) {
             for (let x = 0; x < map[y].length; x++) {
@@ -214,7 +214,7 @@ function interpolate(map, intensity) {
                 }
                 if (x === 0) {
                     map[y][x] = map[y][x];
-                } else if (y === map[y].length - 1) {
+                } else if (x === map[y].length - 1) {
                     map[y][x] = map[y][x];
                 } else {
                     map[y][x] = (map[y][x - 1] + map[y][x + 1]) / 2;
@@ -225,7 +225,7 @@ function interpolate(map, intensity) {
     return map;
 }
 
-const interpolatedMap = interpolate(heightGeneration(generateFrame(400,400), 'test'), 10);
+const interpolatedMap = interpolate(heightGeneration(generateFrame(50,50), 'test'), 2);
 console.log(interpolatedMap);
 
 generateFile(interpolatedMap)
