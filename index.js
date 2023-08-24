@@ -71,11 +71,9 @@ const heightGeneration = (frame, seed=null) => {
 const generateFile = (frame) => {
     const fs = require('fs');
     const { createCanvas } = require('canvas');
-    const { createNoise2D } = require('simplex-noise');
 
     const canvas = createCanvas(frame[0].length, frame.length);
     const context = canvas.getContext('2d');
-    const noise2D = createNoise2D();
 
     frame.forEach((y, yindex) => {
         y.forEach((x, xindex) => {
@@ -84,10 +82,9 @@ const generateFile = (frame) => {
         });
     });
 
-    // Save the canvas as a PNG file
     const stream = fs.createWriteStream('output.png');
-    const pngStream = canvas.createPNGStream();
-    pngStream.pipe(stream);
+
+    canvas.createPNGStream().pipe(stream);
     stream.on('finish', () => {
         console.log('PNG file saved.');
     });
@@ -106,14 +103,11 @@ const generateBetter = (x=100,y=100) => {
         for (let xindex = 0; xindex < x; xindex++) {
             const noise = noise2D(xindex, yindex)
 
-            
-
             context.fillStyle = map(noise);
-            context.fillRect(yindex, xindex, 1, 1);
+            context.fillRect(xindex, yindex, 1, 1);
         }
     }
 
-    // Save the canvas as a PNG file
     const stream = fs.createWriteStream('output.png');
     const pngStream = canvas.createPNGStream();
     pngStream.pipe(stream);
@@ -209,21 +203,21 @@ const map = (height) => {
 
 function interpolate(map, intensity) {
     for (let i = 0; i < intensity; i++) {
-        for (let x = 0; x < map.length; x++) {
-            for (let y = 0; y < map[x].length; y++) {
-                if (x === 0) {
-                    map[x][y] = map[x][y];
-                } else if (x === map.length - 1) {
-                    map[x][y] = map[x][y];
-                } else {
-                    map[x][y] = (map[x - 1][y] + map[x + 1][y]) / 2;
-                }
+        for (let y = 0; y < map.length; y++) {
+            for (let x = 0; x < map[y].length; x++) {
                 if (y === 0) {
-                    map[x][y] = map[x][y];
-                } else if (y === map[x].length - 1) {
-                    map[x][y] = map[x][y];
+                    map[y][x] = map[y][x];
+                } else if (y === map.length - 1) {
+                    map[y][x] = map[y][x];
                 } else {
-                    map[x][y] = (map[x][y - 1] + map[x][y + 1]) / 2;
+                    map[y][x] = (map[y - 1][x] + map[y + 1][x]) / 2;
+                }
+                if (x === 0) {
+                    map[y][x] = map[y][x];
+                } else if (y === map[y].length - 1) {
+                    map[y][x] = map[y][x];
+                } else {
+                    map[y][x] = (map[y][x - 1] + map[y][x + 1]) / 2;
                 }
             }
         }
@@ -231,7 +225,7 @@ function interpolate(map, intensity) {
     return map;
 }
 
-const interpolatedMap = interpolate(heightGeneration(generateFrame(400,400)), 10);
+const interpolatedMap = interpolate(heightGeneration(generateFrame(400,400), 'test'), 10);
 console.log(interpolatedMap);
 
 generateFile(interpolatedMap)
