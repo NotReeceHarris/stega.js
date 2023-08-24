@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "alea": "^1.0.1",
+    "canvas": "^2.11.2",
+    "everpolate": "^0.0.3",
+    "simplex-noise": "^4.0.1"
+  }
+}
