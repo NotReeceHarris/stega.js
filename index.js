@@ -61,31 +61,26 @@ const heightGeneration = (frame, seed=null) => {
     frame.forEach((y, yindex) => {
         y.forEach((x, xindex) => {
             let noise = noise2D(xindex, yindex)
-            noise = String(String(noise).replace('-', '').split('.')[1])[0]
-            noise = noise === 'u' ? 0 : Number(noise)
-            frame[yindex][xindex] = generateRandomNumber(0,9)
+            frame[yindex][xindex] = noise
         });
     });
 
     return frame
 }
 
-const generateFile = (frame, map) => {
+const generateFile = (frame) => {
     const fs = require('fs');
     const { createCanvas } = require('canvas');
+    const { createNoise2D } = require('simplex-noise');
 
-    // Define dimensions for your array of arrays (e.g., width and height)
-    const width = frame[0].length;
-    const height = frame.length;
-
-    // Create a canvas
-    const canvas = createCanvas(width, height);
+    const canvas = createCanvas(frame[0].length, frame.length);
     const context = canvas.getContext('2d');
+    const noise2D = createNoise2D();
 
-    frame.forEach((y, yIndex) => {
-        y.forEach((x, xIndex) => {
+    frame.forEach((y, yindex) => {
+        y.forEach((x, xindex) => {
             context.fillStyle = map(x);
-            context.fillRect(yIndex, xIndex, 1, 1);
+            context.fillRect(yindex, xindex, 1, 1);
         });
     });
 
@@ -198,10 +193,8 @@ const map = (height) => {
     } else if (height < -0.8200) {
         return '#202020'
     }
-    
-    
 
-    return '#ffffff'
+    return '#ffffff00'
 
 }
 
@@ -214,4 +207,32 @@ const map = (height) => {
 //console.log(displayFrame(noisy, map))
 //console.log(displayFrame(smooth, map))
 
-generateBetter(400,400)
+function interpolate(map, intensity) {
+    for (let i = 0; i < intensity; i++) {
+        for (let x = 0; x < map.length; x++) {
+            for (let y = 0; y < map[x].length; y++) {
+                if (x === 0) {
+                    map[x][y] = map[x][y];
+                } else if (x === map.length - 1) {
+                    map[x][y] = map[x][y];
+                } else {
+                    map[x][y] = (map[x - 1][y] + map[x + 1][y]) / 2;
+                }
+                if (y === 0) {
+                    map[x][y] = map[x][y];
+                } else if (y === map[x].length - 1) {
+                    map[x][y] = map[x][y];
+                } else {
+                    map[x][y] = (map[x][y - 1] + map[x][y + 1]) / 2;
+                }
+            }
+        }
+    }
+    return map;
+}
+
+const interpolatedMap = interpolate(heightGeneration(generateFrame(400,400)), 10);
+console.log(interpolatedMap);
+
+generateFile(interpolatedMap)
+//generateBetter(80,40)
