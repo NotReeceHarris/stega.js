@@ -1,8 +1,17 @@
 {
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NotReeceHarris/ascii-generation.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/NotReeceHarris/ascii-generation/issues"
+  },
+  "homepage": "https://github.com/NotReeceHarris/ascii-generation#readme",
   "dependencies": {
-    "alea": "^1.0.1",
     "canvas": "^2.11.2",
-    "everpolate": "^0.0.3",
-    "simplex-noise": "^4.0.1"
+    "pngjs": "^7.0.0"
   }
 }

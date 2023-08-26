@@ -4,45 +4,7 @@ const generateFrame = (w = 64, h = 64) => [...Array.from({ length: h }, () => ne
 const displayFrame = (frame, map) => '\n' + frame.map(y => y.map(x => `${map[x]}   ${Reset}`).join('') + '\n').join('');
 const adjustNumber = (num) => num === 10 ? 9 : num < 0 ? 0 : num;
 
-function bilinearInterpolation(x, y, points) {
-    const x0 = Math.floor(x);
-    const x1 = Math.ceil(x);
-    const y0 = Math.floor(y);
-    const y1 = Math.ceil(y);
 
-    const q00 = points[y0][x0];
-    const q01 = points[y0][x1];
-    const q10 = points[y1][x0];
-    const q11 = points[y1][x1];
-
-    const tx = x - x0;
-    const ty = y - y0;
-
-    const interpolatedValue = 
-        (1 - tx) * (1 - ty) * q00 +
-        tx * (1 - ty) * q01 +
-        (1 - tx) * ty * q10 +
-        tx * ty * q11;
-
-    return interpolatedValue;
-}
-
-function smoothArrayWithInterpolation(array) {
-    const newArray = [];
-
-    for (let y = 0; y < array.length; y++) {
-        const newRow = [];
-
-        for (let x = 0; x < array[y].length; x++) {
-            const interpolatedValue = bilinearInterpolation(x, y, array);
-            newRow.push(interpolatedValue);
-        }
-
-        newArray.push(newRow);
-    }
-
-    return newArray;
-}
 
 
 const heightGeneration = (frame, seed=null) => {
