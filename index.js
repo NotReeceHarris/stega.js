@@ -1,194 +1,220 @@
-const generateRandomNumber = (min, max) => (require('crypto').randomBytes(4).readUInt32LE(0) % (max - min + 1)) + min;;
-const generateFrame = (w = 64, h = 64) => [...Array.from({ length: h }, () => new Array(w).fill(0))];
+// TODO : 2 LAYER OBFUSCATION
 
-const displayFrame = (frame, map) => '\n' + frame.map(y => y.map(x => `${map[x]}   ${Reset}`).join('') + '\n').join('');
-const adjustNumber = (num) => num === 10 ? 9 : num < 0 ? 0 : num;
+const crypto = require('crypto');
+const fs = require('fs');
+const { createCanvas } = require('canvas');
 
+const maps = [{
+    '0': '#FFFFFF',
+    '1': '#FEFFFF',
+    '2': '#FEFEFF',
+    '3': '#FEFEFE',
+    '4': '#FFFEFE',
+    '5': '#FFFFFE',
+    '6': '#FFFEFF',
+    '7': '#FFFEFD',
+    '8': '#FFFDFD',
+    '9': '#FFFDFE',
+    'a': '#FDFEFF',
+    'b': '#FEFDFF',
+    'c': '#FEFDFD',
+    'd': '#FDFEFD',
+    'e': '#FFFDFF',
+    'f': '#FFFFFD',
+    'undefined': '#FDFFFD',
+    '#FFFFFF': '0',
+    '#FEFFFF': '1',
+    '#FEFEFF': '2',
+    '#FEFEFE': '3',
+    '#FFFEFE': '4',
+    '#FFFFFE': '5',
+    '#FFFEFF': '6',
+    '#FFFEFD': '7',
+    '#FFFDFD': '8',
+    '#FFFDFE': '9',
+    '#FDFEFF': 'a',
+    '#FEFDFF': 'b',
+    '#FEFDFD': 'c',
+    '#FDFEFD': 'd',
+    '#FFFDFF': 'e',
+    '#FFFFFD': 'f',
+    '#FDFFFD': ''
+}, {
+    '0': '#42eaa7',
+    '1': '#2a72c3',
+    '2': '#df3a8f',
+    '3': '#087ff5',
+    '4': '#f041cd',
+    '5': '#ea294f',
+    '6': '#f4ba18',
+    '7': '#2ebfa3',
+    '8': '#fbc2e3',
+    '9': '#a300b4',
+    'a': '#0dc8d0',
+    'b': '#9fb15f',
+    'c': '#e1584c',
+    'd': '#c28ade',
+    'e': '#e6f5a2',
+    'f': '#44b409',
+    'undefined': '#81cad6',
+    '#42eaa7': '0',
+    '#2a72c3': '1',
+    '#df3a8f': '2',
+    '#087ff5': '3',
+    '#f041cd': '4',
+    '#ea294f': '5',
+    '#f4ba18': '6',
+    '#2ebfa3': '7',
+    '#fbc2e3': '8',
+    '#a300b4': '9',
+    '#0dc8d0': 'a',
+    '#9fb15f': 'b',
+    '#e1584c': 'c',
+    '#c28ade': 'd',
+    '#e6f5a2': 'e',
+    '#44b409': 'f',
+    '#81cad6': ''
+}]
 
-
-
-const heightGeneration = (frame, seed=null) => {
-
-    const { createNoise2D } = require('simplex-noise');
-    let noise2D = null
-
-    if (seed != null) {
-        const alea = require('alea')
-        const prng = new alea('seed')
-        noise2D = createNoise2D(prng);
-    } else {
-        noise2D = createNoise2D();
-    }
-
-    frame.forEach((y, yindex) => {
-        y.forEach((x, xindex) => {
-            let noise = noise2D(xindex, yindex)
-            frame[yindex][xindex] = noise
-        });
-    });
-
-    return frame
-}
-
-const generateFile = (frame) => {
-    const fs = require('fs');
-    const { createCanvas } = require('canvas');
-
-    const canvas = createCanvas(frame[0].length, frame.length);
-    const context = canvas.getContext('2d');
-
-    frame.forEach((y, yindex) => {
-        y.forEach((x, xindex) => {
-            context.fillStyle = map(x);
-            context.fillRect(yindex, xindex, 1, 1);
-        });
-    });
-
-    const stream = fs.createWriteStream('output.png');
-
-    canvas.createPNGStream().pipe(stream);
-    stream.on('finish', () => {
-        console.log('PNG file saved.');
-    });
-}
-
-const generateBetter = (x=100,y=100) => {
-    const fs = require('fs');
-    const { createCanvas } = require('canvas');
-    const { createNoise2D } = require('simplex-noise');
-
-    const canvas = createCanvas(x, y);
-    const context = canvas.getContext('2d');
-    const noise2D = createNoise2D();
-
-    for (let yindex = 0; yindex < y; yindex++) {
-        for (let xindex = 0; xindex < x; xindex++) {
-            const noise = noise2D(xindex, yindex)
-
-            context.fillStyle = map(noise);
-            context.fillRect(xindex, yindex, 1, 1);
+function convertKeysToLowercase(obj) {
+    const result = {};
+  
+    for (const key in obj) {
+        if (Object.hasOwnProperty.call(obj, key)) {
+            const lowercaseKey = key.toLowerCase();
+            result[lowercaseKey] = obj[key];
         }
     }
-
-    const stream = fs.createWriteStream('output.png');
-    const pngStream = canvas.createPNGStream();
-    pngStream.pipe(stream);
-    stream.on('finish', () => {
-        console.log('PNG file saved.');
-    });
+  
+    return result;
 }
+  
+const map = convertKeysToLowercase(maps[0])
 
-const map = (height) => {
-
-    if (height > 0.8400) {
-        return '#fafafa'
-    } else if (height > 0.7670 && height < 0.8400) {
-        return '#fab49b'
-    } else if (height > 0.6940 && height < 0.7670) {
-        return '#fa5e5f'
-    } else if (height > 0.6210 && height < 0.6940) {
-        return '#fe0000'
-    } else if (height > 0.5480 && height < 0.6210) {
-        return '#e74600'
-    } else if (height > 0.4750 && height < 0.5480) {
-        return '#fa8c00'
-    } else if (height > 0.4020 && height < 0.4750) {
-        return '#fee60a'
-    } else if (height > 0.3290 && height < 0.4020) {
-        return '#e6aa14'
-    } else if (height > 0.2560 && height < 0.3290) {
-        return '#be831f'
-    } else if (height > 0.2240 && height < 0.2560) {
-        return '#9f6418'
-    } else if (height > 0.1920 && height < 0.2240) {
-        return '#825015'
-    } else if (height > 0.1600 && height < 0.1920) {
-        return '#4b2f23'
-    } else if (height > 0.1280 && height < 0.1600) {
-        return '#63643c'
-    } else if (height > 0.0960 && height < 0.1280) {
-        return '#789656'
-    } else if (height > 0.0640 && height < 0.0960) {
-        return '#5aaf4a'
-    } else if (height > 0.0320 && height < 0.0640) {
-        return '#42c84b'
-    } else if (height > 0 && height < 0.0320) {
-        return '#96dc96'
-    } else if (height < 0 && height > -0.0320) {
-        return '#d2dcd3'
-    } else if (height < -0.0320 && height > -0.0640) {
-        return '#abbedc'
-    } else if (height < -0.0640 && height > -0.0960) {
-        return '#79bedd'
-    } else if (height < -0.0960 && height > -0.1280) {
-        return '#3dbedd'
-    } else if (height < -0.1280 && height > -0.1600) {
-        return '#5ae1f5'
-    } else if (height < -0.1600 && height > -0.1920) {
-        return '#21dfff'
-    } else if (height < -0.1920 && height > -0.2240) {
-        return '#20beff'
-    } else if (height < -0.2240 && height > -0.2560) {
-        return '#2096f0'
-    } else if (height < -0.2560 && height > -0.3290) {
-        return '#0f6edc'
-    } else if (height < -0.3290 && height > -0.4020) {
-        return '#1040c8'
-    } else if (height < -0.4020 && height > -0.4750) {
-        return '#2010c8'
-    } else if (height < -0.4750 && height > -0.5480) {
-        return '#501e91'
-    } else if (height < -0.5480 && height > -0.6210) {
-        return '#864fb5'
-    } else if (height < -0.6210 && height > -0.6940) {
-        return '#aa71d8'
-    } else if (height < -0.6940 && height > -0.7670) {
-        return '#bd6e9e'
-    } else if (height < -0.7670 && height > -0.8200) {
-        return '#d97ace'
-    } else if (height < -0.8200) {
-        return '#202020'
+function getRandomNumber(min, max) {
+    if (min >= max) {
+      throw new Error('Invalid range: min must be less than max');
     }
+  
+    const range = max - min + 1;
+    const bytesNeeded = Math.ceil(Math.log2(range) / 8);
+  
+    if (bytesNeeded > 6) {
+      throw new Error('Invalid range: too large');
+    }
+  
+    const maxValidValue = 256 ** bytesNeeded - 1;
+    const buffer = Buffer.allocUnsafe(bytesNeeded);
+  
+    let randomValue;
+    do {
+      crypto.randomFillSync(buffer);
+      randomValue = buffer.readUIntBE(0, bytesNeeded);
+    } while (randomValue > maxValidValue - (maxValidValue % range));
+  
+    return min + (randomValue % range);
+  }
 
-    return '#ffffff00'
+function getSeedableRandomNumber(seed, max) {
+    const hmac = crypto.createHmac('sha256', seed);
+    hmac.update('random-data');
+    const hash = hmac.digest('hex');
+    
+    const randomBytes = Buffer.from(hash, 'hex');
+    const randomNumber = randomBytes.readUInt32BE(0) % (max + 1);
+    
+    return randomNumber;
+  }
 
+const keys = () => {
+    return {
+        key: crypto.randomBytes(32).toString('hex'),
+        iv: crypto.randomBytes(16).toString('hex')
+    }
 }
 
-//const frame = generateFrame(64*100,64*100)
-//const noisy = heightGeneration(frame)
-//const smooth = smoothArrayWithInterpolation(noisy);
+const encrypt = (text, key, iv) => {
+    const ENCRYPTION_KEY = Buffer.from(key, 'hex'); const IV = Buffer.from(iv, 'hex');
+    const cipher = crypto.createCipheriv('aes-256-cbc', ENCRYPTION_KEY, IV);
 
-//generateFile(smooth, map)
+    const obfArray = [
+        crypto.randomBytes(getRandomNumber(0, text.length)),
+        crypto.randomBytes(getRandomNumber(0, text.length)),
+        crypto.randomBytes(getRandomNumber(0, text.length)),
+        crypto.randomBytes(getRandomNumber(0, text.length)),
+        crypto.randomBytes(getRandomNumber(0, text.length)),
+        crypto.randomBytes(getRandomNumber(0, text.length))
+    ]
 
-//console.log(displayFrame(noisy, map))
-//console.log(displayFrame(smooth, map))
+    obfArray[getSeedableRandomNumber(iv, 4)] = Buffer.from(text, 'ascii')
+    let encrypted = cipher.update(JSON.stringify(obfArray));
+    encrypted = Buffer.concat([encrypted, cipher.final()]);
+    return encrypted.toString('hex');
+}
 
-const interpolate = (map, intensity) => {
-    for (let i = 0; i < intensity; i++) {
-        for (let y = 0; y < map.length; y++) {
-            for (let x = 0; x < map[y].length; x++) {
-                if (y === 0) {
-                    map[y][x] = map[y][x];
-                } else if (y === map.length - 1) {
-                    map[y][x] = map[y][x];
-                } else {
-                    map[y][x] = (map[y - 1][x] + map[y + 1][x]) / 2;
-                }
-                if (x === 0) {
-                    map[y][x] = map[y][x];
-                } else if (x === map[y].length - 1) {
-                    map[y][x] = map[y][x];
-                } else {
-                    map[y][x] = (map[y][x - 1] + map[y][x + 1]) / 2;
-                }
+const decrypt = (text, key, iv) => {
+    const ENCRYPTION_KEY = Buffer.from(key, 'hex'); const IV = Buffer.from(iv, 'hex');
+    const encryptedText = Buffer.from(text, 'hex');
+    const decipher = crypto.createDecipheriv('aes-256-cbc', ENCRYPTION_KEY, IV);
+    let decrypted = decipher.update(encryptedText);
+    decrypted = Buffer.concat([decrypted, decipher.final()]);
+    return Buffer.from(JSON.parse(decrypted)[getSeedableRandomNumber(iv, 4)].data).toString('ascii');
+}
+
+const encode = (data, fn='output.png', v=false, m=map) => {
+
+    return new Promise((res) => {
+        const {h, w} = { h: Math.ceil(Math.sqrt(data.length)), w: (data.length % 2 === 1 ? (Math.ceil(Math.sqrt(data.length)))+1 : (Math.ceil(Math.sqrt(data.length)))) }
+
+        const canvas = createCanvas(h, w);
+        const context = canvas.getContext('2d');
+        let count = 0;
+
+        for (let y = 0; y < h; y++) {
+            for (let x = 0; x < w; x++) {
+                context.fillStyle = m[String(data.split('')[count]).toLowerCase()];
+                context.fillRect(x, y, 1, 1);
+                count++
             }
         }
-    }
-    return map;
+
+        const stream = fs.createWriteStream(fn);
+        canvas.createPNGStream().pipe(stream);
+
+        stream.on('finish', () => {
+            if (v) console.log('Encoded successfully!');
+            fs.createReadStream(fn)
+                .pipe(new (require('pngjs').PNG)())
+                .on('parsed', function () {
+                    res(this.data);
+                })
+                .on('error', () => {
+                    res(null)
+                });
+        });
+    })
+
 }
 
-const interpolatedMap = interpolate(heightGeneration(generateFrame(50,50), 'test'), 2);
-console.log(interpolatedMap);
+const decode = (fn, m=map) => {
+    const toHex = (n) => n.toString(16).length === 1 ? '0' + n.toString(16) : n.toString(16);
+    return new Promise((res) => {
+        fs.createReadStream(fn)
+        .pipe(new (require('pngjs').PNG)())
+        .on('parsed', function() {
+            let string = ''
+            for (let y = 0; y < this.height; y++) {
+                for (let x = 0; x < this.width; x++) {
+                    const idx = (this.width * y + x) << 2;
+                    string += m[`#${toHex(this.data[idx])}${toHex(this.data[idx + 1])}${toHex(this.data[idx + 2])}`.toLowerCase()]
+                }
+            }
+            res(string)
+        })
+    }).then((data) => {
+        return data
+    })
+    
+}
 
-generateFile(interpolatedMap)
-//generateBetter(80,40)
+module.exports = {encrypt, decrypt, encode, decode, keys}
