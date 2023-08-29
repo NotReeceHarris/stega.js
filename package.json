@@ -12,7 +12,6 @@
   "homepage": "https://github.com/NotReeceHarris/ascii-generation#readme",
   "dependencies": {
     "canvas": "^2.11.2",
-    "pngjs": "^7.0.0",
-    "seedrandom": "^3.0.5"
+    "pngjs": "^7.0.0"
   }
 }
