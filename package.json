@@ -12,6 +12,8 @@
   "homepage": "https://github.com/NotReeceHarris/pixel-aes-256-cbc#readme",
   "dependencies": {
     "canvas": "^2.11.2",
-    "pngjs": "^7.0.0"
+    "pngjs": "^7.0.0",
+    "sharp": "^0.32.5",
+    "yargs": "^17.7.2"
   }
 }
