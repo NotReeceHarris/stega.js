@@ -2,14 +2,14 @@
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/NotReeceHarris/ascii-generation.git"
+    "url": "git+https://github.com/NotReeceHarris/pixel-aes-256-cbc.git"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Reece Harris <reeceharris@duck.com>",
+  "license": "AGPL-3.0",
   "bugs": {
-    "url": "https://github.com/NotReeceHarris/ascii-generation/issues"
+    "url": "https://github.com/NotReeceHarris/pixel-aes-256-cbc/issues"
   },
-  "homepage": "https://github.com/NotReeceHarris/ascii-generation#readme",
+  "homepage": "https://github.com/NotReeceHarris/pixel-aes-256-cbc#readme",
   "dependencies": {
     "canvas": "^2.11.2",
     "pngjs": "^7.0.0"
