@@ -1,9 +1,4 @@
-<h1 align="center">
-  <picture><img src="/readme/steg-logo-nostroke.png" height="40%"/></picture>
-</h1>
-<h2 align="center">
-  Utilizing AES encryption and steganography to covertly embed data in plain view. 
-</h2>
+<div align="center"><img src="/readme/steg-logo-nostroke.png" width="40%"/></div>
 
 ### What is Steganography?
 Steganography is the art and science of concealing information within seemingly innocuous carriers, such as images, audio files, or text, in a way that the presence of the hidden data is not readily apparent to observers. Unlike cryptography, which focuses on securing the content of a message, steganography is concerned with ensuring the secrecy of the message itself. By subtly altering the carrier's data and making imperceptible changes, steganography allows confidential information to be transmitted without arousing suspicion. The hidden data is typically embedded within the carrier using various techniques, from modifying the least significant bits of binary data to exploiting imperceptible variations in media formats. Steganography finds applications in digital security, covert communication, and data protection, where the goal is to maintain confidentiality by keeping the message's existence concealed from unintended recipients.
