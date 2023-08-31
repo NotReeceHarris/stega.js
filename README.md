@@ -1,11 +1,11 @@
 <div align="center"><img src="/readme/steg-logo-nostroke.svg" width="40%"/></div>
 
-### What is Steganography?
+### What is Steganography
 Steganography is the art and science of concealing information within seemingly innocuous carriers, such as images, audio files, or text, in a way that the presence of the hidden data is not readily apparent to observers. Unlike cryptography, which focuses on securing the content of a message, steganography is concerned with ensuring the secrecy of the message itself. By subtly altering the carrier's data and making imperceptible changes, steganography allows confidential information to be transmitted without arousing suspicion. The hidden data is typically embedded within the carrier using various techniques, from modifying the least significant bits of binary data to exploiting imperceptible variations in media formats. Steganography finds applications in digital security, covert communication, and data protection, where the goal is to maintain confidentiality by keeping the message's existence concealed from unintended recipients.
 
 ### Encoding types
 
-encoding | supported formats | link
+Encoding | Supported formats | Wiki link
 --- | --- | ---
 8-bit alpha channel | `PNG`, `TIFF`, `WebP` | [/wiki/8‐bit-alpha-channel](https://github.com/NotReeceHarris/stega.js/wiki/8%E2%80%90bit-alpha-channel)
 
@@ -16,7 +16,7 @@ The operational mechanism of `stega.js` involves a sequential traversal of pixel
 <p align="center">
   <img src="/readme/diagram-fixed.png">
 </p>
-<sub>The process begins by encoding the message into hexadecimal format, with each value then correlated with an alpha map. Subsequently, every pixel within a provided image is allocated this alpha value. The culmination of these steps yields an encoded image as the final output. please note this diagram only shows the encoding and not the encryption for more info on the encryption see <a href="#encryption">#encryption</a></sub>
+<sub>The process begins by encoding the message into hexadecimal format, with each value then correlated with an alpha map. Subsequently, every pixel within a provided image is allocated this alpha value. The culmination of these steps yields an encoded image as the final output. please note this diagram only shows the encoding and not the encryption for more info on the encryption, see <a href="#encryption">#encryption</a></sub>
 
 ### Encryption
 
