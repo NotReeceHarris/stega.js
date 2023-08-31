@@ -5,10 +5,7 @@
   "main": "index.js",
   "bin": {
     "stegjs": "./src/index.js",
-    "steg": "./src/index.js"
-  },
-  "scripts": {
-    "test": "node test.js"
+    "steg.js": "./src/index.js"
   },
   "repository": {
     "type": "git",
