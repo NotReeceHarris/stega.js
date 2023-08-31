@@ -12,6 +12,8 @@ The operational mechanism of `pixel-aes-256-gcm` involves a sequential traversal
 </p>
 <sub>The process begins by encoding the message into hexadecimal format, with each value then correlated with an alpha map. Subsequently, every pixel within a provided image is allocated this alpha value. The culmination of these steps yields an encoded image as the final output. please note this diagram only shows the encoding and not the encryption for more info on the encryption see <a href="#encryption">#encryption</a></sub>
 
+### Encryption
+
 ### Preview
 original | formatted | encoded
 --- | --- | ---
