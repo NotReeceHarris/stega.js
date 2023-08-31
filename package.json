@@ -1,10 +1,10 @@
 {
   "name": "stega.js",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "🖼️ Utilizing AES encryption and steganography to covertly embed data in plain view. ",
-  "main": "index.js",
+  "main": "./src/index.js",
   "bin": {
-    "stegjs": "./src/index.js",
+    "stegajs": "./src/index.js",
     "steg.js": "./src/index.js"
   },
   "repository": {
@@ -27,6 +27,10 @@
     "sharp": "^0.32.5",
     "yargs": "^17.7.2"
   },
+  "files": [
+    "LICENSE",
+    "src/"
+  ],
   "keywords": [
     "aes",
     "aes-256",
