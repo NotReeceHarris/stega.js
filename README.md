@@ -5,6 +5,6 @@ Steganography is the art and science of concealing information within seemingly 
 
 ### Encoding types
 
-Encoding | Supported formats | Wiki link
---- | --- | ---
-8-bit alpha channel | `PNG`, `TIFF`, `WebP` | [/wiki/8‐bit-alpha-channel](https://github.com/NotReeceHarris/stega.js/wiki/8%E2%80%90bit-alpha-channel)
+Encoding | Encryption | Supported formats | Wiki link
+--- | --- | --- | ---
+8-bit alpha channel | `aes-256-gcm` | `PNG`, `TIFF`, `WebP` | [/wiki/8‐bit-alpha-channel](https://github.com/NotReeceHarris/stega.js/wiki/8%E2%80%90bit-alpha-channel)
