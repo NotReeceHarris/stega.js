@@ -7,6 +7,9 @@
     "stegjs": "./src/index.js",
     "steg": "./src/index.js"
   },
+  "scripts": {
+    "test": "node test.js"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/NotReeceHarris/stega.js.git"

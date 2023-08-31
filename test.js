@@ -1,3 +1,3 @@
 const stegjs = require('./src/index.js')
 
-console.log(stegjs)
+console.log(stegjs instanceof Object)
