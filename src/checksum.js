@@ -22,5 +22,5 @@ function calculateChecksum(filePath, algorithm = 'md5') {
 }
 
 (async () => {
-    console.log(`\nInput     : ${await calculateChecksum('input.jpg')}\nFormatted : ${await calculateChecksum('formatted.png')}\nEncoded   : ${await calculateChecksum('encoded.png')}\n`)
+    console.log(`\nInput     : ${await calculateChecksum('./readme/image.jpg')}\nFormatted : ${await calculateChecksum('./readme/formatted.image.png')}\nEncoded   : ${await calculateChecksum('./readme/encoded.image.png')}\n`)
 })()

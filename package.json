@@ -9,6 +9,7 @@
   "bugs": {
     "url": "https://github.com/NotReeceHarris/pixel-aes-256-cbc/issues"
   },
+  "readme": "README.npm.md",
   "homepage": "https://github.com/NotReeceHarris/pixel-aes-256-cbc#readme",
   "dependencies": {
     "canvas": "^2.11.2",
