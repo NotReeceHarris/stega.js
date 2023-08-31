@@ -1,98 +1,112 @@
+#!/usr/bin/env node
+const fs = require('fs');
+
 if (require.main === module) {
-
-	// Require yargs module to parse command line arguments
-	const yargs = require('yargs');
-
-	yargs.command({
-		command: 'keys',
-		describe: 'Generate required hex keys.',
+	require('yargs')
+    .scriptName("stegjs")
+    .usage('$0 <cmd> [args]')
+    .command({
+		command: 'alpha-format',
+		describe: '// Format an image for the 8-bit alpha channel encoder.',
+        builder: {
+            input: {
+                describe: 'Path to a valid image',
+                demandOption: true,
+                type: 'string'
+            },
+            output: {
+                describe: 'Path for output image',
+                demandOption: true,
+                type: 'string'
+            }
+        },
 		handler(argv) {
-			const aes = require('./encryption')
-            const keys = aes.keys()
+            const encoder = require('./alpha/encoder');
 
-			console.log(keys)
-            console.log(`\n${keys.key}:${keys.nonce}`)
+            if (!argv.output.endsWith('.png')) {
+                argv.output = argv.output + '.png'
+            }
+
+            fs.access(argv.input, fs.constants.F_OK, (err) => {
+                if (err) {
+                    throw new Error('Input files does\'nt exist')
+                } else {
+                    encoder.format(argv.input, argv.output).then(() => {
+                        console.log('File formatted successfully')
+                    })
+
+                }
+            });
+		}
+	})
+    .command({
+		command: 'alpha-keys',
+		describe: '// Generate aes-256-gcm keys for the alpha encoding.',
+		handler() {
+            const key = require('./alpha/encryption').keys()
+
+            console.log('\n')
+            console.log(key)
+            console.log(`\nkeystring: ${key.key}:${key.nonce}`, '\n')
+		}
+	})
+    .command({
+		command: 'alpha-encode',
+		describe: '// Encode an image in the 8-bit alpha channel encoder.',
+        builder: {
+            plaintext: {
+                describe: 'The plaintext you want to encrypt and encode.',
+                demandOption: true,
+                type: 'string'
+            },
+            input: {
+                describe: 'A freshly formatted image',
+                demandOption: true,
+                type: 'string'
+            },
+            output: {
+                describe: 'The output filename for the encrypted image. (must be a png)',
+                demandOption: true,
+                type: 'string'
+            },
+
+            keystring: {
+                describe: 'The formatted keystring "{key}:{nonce}"',
+                demandOption: false,
+                type: 'string'
+            },
+            key: {
+                describe: 'The encryption key to encrypt.',
+                demandOption: false,
+                type: 'string'
+            },
+            nonce: {
+                describe: 'The encryption nonce to encrypt.',
+                demandOption: false,
+                type: 'string'
+            }
+        },
+		handler(argv) {
+            const encoder = require('./alpha/encoder');
+
+            if (!argv.output.endsWith('.png')) {
+                argv.output = argv.output + '.png'
+            }
+
+            fs.access(argv.input, fs.constants.F_OK, (err) => {
+                if (err) {
+                    throw new Error('Input files does\'nt exist')
+                } else {
+                    encoder.format(argv.input, argv.output).then(() => {
+                        console.log('File formatted successfully')
+                    })
+
+                }
+            });
 		}
 	}).command({
-			command: 'format',
-			describe: 'Format an image to be compatible.',
-			builder: {
-				input: {
-					describe: 'A valid image',
-					demandOption: true,
-					type: 'string'
-				},
-                output: {
-					describe: 'The filename for the formatted image (must be a png)',
-					demandOption: true,
-					type: 'string'
-				}
-			},
-			handler(argv) {
-                const {format} = require('./encoder');
-                format(argv.input, argv.output);
-			}
-		}).command({
-			command: 'encode',
-			describe: 'Encode a formatted image.',
-			builder: {
-				plaintext: {
-					describe: 'The plaintext you want to encrypt and encode.',
-					demandOption: true,
-					type: 'string'
-				},
-                input: {
-					describe: 'A freshly formatted image',
-					demandOption: true,
-					type: 'string'
-				},
-                output: {
-					describe: 'The output filename for the encrypted image. (must be a png)',
-					demandOption: true,
-					type: 'string'
-				},
-
-                keystring: {
-					describe: 'The formatted keystring "{key}:{nonce}"',
-					demandOption: false,
-					type: 'string'
-				},
-                key: {
-					describe: 'The encryption key to encrypt.',
-					demandOption: false,
-					type: 'string'
-				},
-                nonce: {
-					describe: 'The encryption nonce to encrypt.',
-					demandOption: false,
-					type: 'string'
-				}
-			},
-			handler(argv) {
-                const {encode} = require('./encoder');
-				
-                if (argv.keystring === null) {
-                    if (argv.key === null && argv.nonce === null) {
-                        throw new Error('If keystring isnt provided a key and nonce must be')
-                        return;
-                    }
-                } else {
-                    argv.key = argv.keystring.split(':')[0]
-                    argv.nonce = argv.keystring.split(':')[1]
-                }
-
-                encode(Buffer.from(argv.plaintext, 'ascii'), argv.input, argv.output, {
-                    key: argv.key,
-                    nonce: argv.nonce
-                }).then((tag) => {
-                    console.log(tag)
-                    console.log(`\n${tag.key}:${tag.nonce}:${tag.tag}`)
-                })
-
-			}
-		}).command({
-			command: 'decode',
-			describe: 'Decode an image.',
+			command: 'alpha-decode',
+			describe: '// Decode an image in the 8-bit alpha channel encoder.',
 			builder: {
 				input: {
 					describe: 'The encoded file',
@@ -122,12 +136,11 @@ if (require.main === module) {
 				}
 			},
 			handler(argv) {
-                const {decode} = require('./encoder');
+                const {decode} = require('./alpha/encoder');
 
 				if (argv.keystring === null) {
                     if (argv.key === null && argv.nonce === null && argv.tag === null) {
                         throw new Error('If keystring isnt provided a key, nonce, tag must be')
-                        return;
                     }
                 } else {
                     argv.key = argv.keystring.split(':')[0]
@@ -143,9 +156,12 @@ if (require.main === module) {
                 })
 			}
 		})
-
-	// Parse the command line arguments
-		.argv;
+    .argv;
 } else {
-	module.exports = require('./encoder');
+	module.exports = {
+        alpha: {
+            ...require('./alpha/encoder'),
+            ...require('./alpha/encryption')
+        }
+    };
 } 

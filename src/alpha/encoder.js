@@ -170,4 +170,4 @@ const decode = async (ifn, keys, tag) => {
 
 }
 
-module.exports = {format, encode, decode, size}
+module.exports = {format, encode, decode}
