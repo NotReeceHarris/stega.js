@@ -1,20 +1,31 @@
 {
+  "name": "stega.js",
+  "version": "1.0.0",
+  "description": "🖼️ Utilizing AES encryption and steganography to covertly embed data in plain view. ",
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/NotReeceHarris/pixel-aes-256-cbc.git"
+    "url": "git+https://github.com/NotReeceHarris/pixel-aes-256-gcm.git"
   },
   "author": "Reece Harris <reeceharris@duck.com>",
   "license": "AGPL-3.0",
   "bugs": {
-    "url": "https://github.com/NotReeceHarris/pixel-aes-256-cbc/issues"
+    "url": "https://github.com/NotReeceHarris/pixel-aes-256-gcm/issues"
   },
   "readme": "README.npm.md",
-  "homepage": "https://github.com/NotReeceHarris/pixel-aes-256-cbc#readme",
+  "homepage": "https://github.com/NotReeceHarris/pixel-aes-256-gcm#readme",
   "dependencies": {
     "canvas": "^2.11.2",
     "pngjs": "^7.0.0",
     "sharp": "^0.32.5",
     "yargs": "^17.7.2"
-  }
+  },
+  "keywords": [
+    "aes",
+    "aes-256",
+    "aes-256-gcm",
+    "steganography",
+    "image-encryption",
+    "encryption"
+  ]
 }
