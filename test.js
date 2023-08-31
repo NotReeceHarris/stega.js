@@ -1,3 +1,2 @@
 const stegjs = require('./src/index.js')
-
-console.log(stegjs instanceof Object)
+process.exit(0);
