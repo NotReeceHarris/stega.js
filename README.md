@@ -15,4 +15,4 @@ The operational mechanism of `pixel-aes-256-gcm` involves a sequential traversal
 original | formatted | encoded
 --- | --- | ---
 ![](/readme/image.jpg) | ![](/readme/formatted.image.png) | ![](/readme/encoded.image.png)
-7a925b7c208f8c95b207cdf62e7b5318 | cee8cd61a9efb87758e1b7fe614a044a | 7a925b7c208f8c95b207cdf62e7b5318
+76cb46bdd065fd88d6db9722467418a0 | cee8cd61a9efb87758e1b7fe614a044a | 7a925b7c208f8c95b207cdf62e7b5318
