@@ -39,4 +39,4 @@ This process allows for the smooth integration of new steganographic ideas into 
 
 Encoding | Encryption | Supported formats | Rating | Wiki link
 --- | --- | --- | --- | ---
-8-bit alpha channel | `aes-256-gcm` | `PNG`, `TIFF`, `WebP` | 60 | [/wiki/8‐bit-alpha-channel](https://github.com/NotReeceHarris/stega.js/wiki/8%E2%80%90bit-alpha-channel)
+8-bit alpha channel | `aes-256-gcm` | `PNG` `TIFF` `WebP` | 60 | [/wiki/8‐bit-alpha-channel](https://github.com/NotReeceHarris/stega.js/wiki/8%E2%80%90bit-alpha-channel)
