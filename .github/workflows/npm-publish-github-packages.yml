@@ -13,6 +13,10 @@ jobs:
            node-version: '16.x'
            registry-url: https://npm.pkg.github.com/
            scope: '@notreeceharris'
+       - uses: jgierer12/npm-auth-gpr@v1
+         with:
+           token: ${{ secrets.GITHUB_TOKEN }}
+       - run: npm ci
        - run: npm i
        - run: npm publish
          env:
