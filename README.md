@@ -40,3 +40,13 @@ This process allows for the smooth integration of new steganographic ideas into 
 Encoding | Encryption | Supported formats | Rating | Wiki link
 --- | --- | --- | --- | ---
 8-bit alpha channel | `aes-256-gcm` | `PNG` `TIFF` `WebP` | 60 | [/wiki/8‐bit-alpha-channel](https://github.com/NotReeceHarris/stega.js/wiki/8%E2%80%90bit-alpha-channel)
+
+## Licensing
+```
+                    GNU AFFERO GENERAL PUBLIC LICENSE
+                       Version 3, 19 November 2007
+
+   Copyright (C) 2007 Free Software Foundation, Inc. <https://fsf.org/>
+     Everyone is permitted to copy and distribute verbatim copies
+      of this license document, but changing it is not allowed.
+```
