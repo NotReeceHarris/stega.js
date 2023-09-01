@@ -1,4 +1,7 @@
-<div align="center"><img src="/readme/stega-logo-background-rounded.svg" width="40%"/></div>
+<div align="center">
+  <p> </p>
+  <img src="/readme/stega-logo-background-rounded.svg" width="40%"/>
+</div>
 
 ##
 
