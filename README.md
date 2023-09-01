@@ -1,6 +1,6 @@
 <div align="center">
 <p> </p>
-  <img src="/readme/stega-logo-background-rounded.svg" width="40%"/>
+  <img src="https://raw.githubusercontent.com/NotReeceHarris/stega.js/94c280fb053e0fda90cf7b52b7de0992264da49c/readme/stega-logo-background-rounded.svg" width="40%"/>
 </div>
 
 ##
