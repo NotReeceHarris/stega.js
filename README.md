@@ -1,6 +1,6 @@
 <div align="center">
   <p> </p>
-  <img src="/readme/stega-logo-background-rounded.svg" width="70%"/>
+  <img src="/readme/stega-logo-background-rounded.svg" width="50%"/>
 </div>
 
 ##
