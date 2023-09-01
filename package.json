@@ -22,7 +22,6 @@
   "bugs": {
     "url": "https://github.com/NotReeceHarris/stega.js/issues"
   },
-  "readme": "README.md",
   "homepage": "https://github.com/NotReeceHarris/stega.js/wiki",
   "dependencies": {
     "canvas": "^2.11.2",
