@@ -1,6 +1,6 @@
 {
   "name": "stega.js",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "🖼️ Utilizing AES encryption and steganography to covertly embed data in plain view. ",
   "main": "./src/index.js",
   "bin": {
@@ -13,6 +13,9 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/NotReeceHarris/stega.js.git"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/@notreeceharris"
   },
   "scripts": {
     "test": "exit 0"
