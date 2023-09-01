@@ -2,10 +2,12 @@
 
 ##
 
-<p align="center"><img src="https://img.shields.io/npm/v/stega.js?style=for-the-badge&amp;labelColor=%23313531&amp;color=%23f1e845" alt="npm">
-<img src="https://img.shields.io/badge/supported_algorithms-1-we?style=for-the-badge&amp;labelColor=%23313531&amp;color=%23f1e845" alt="Static Badge">
-<img src="https://img.shields.io/github/license/notreeceharris/stega.js?style=for-the-badge&amp;labelColor=%23313531&amp;color=%23f1e845" alt="GitHub">
-<img src="https://img.shields.io/github/issues/notreeceharris/stega.js/new%20algorithm?style=for-the-badge&amp;label=submitted%20algorithms&amp;labelColor=%23313531&amp;color=%23f1e845&amp;cacheSeconds=0" alt="GitHub issues by-label"></p>
+<div align="center">
+  <img src="https://img.shields.io/npm/v/stega.js?style=for-the-badge&amp;labelColor=%23313531&amp;color=%23f1e845" alt="npm">
+  <img src="https://img.shields.io/github/license/notreeceharris/stega.js?style=for-the-badge&amp;labelColor=%23313531&amp;color=%23f1e845" alt="GitHub">
+  <img src="https://img.shields.io/badge/supported_algorithms-1-we?style=for-the-badge&amp;labelColor=%23313531&amp;color=%23f1e845" alt="Static Badge">
+  <img src="https://img.shields.io/github/issues/notreeceharris/stega.js/new%20algorithm?style=for-the-badge&amp;label=submitted%20algorithms&amp;labelColor=%23313531&amp;color=%23f1e845&amp;cacheSeconds=0" alt="GitHub issues by-label">
+</div>
 
 
 
