@@ -3,7 +3,7 @@ const fs = require('fs');
 
 if (require.main === module) {
 	require('yargs')
-    .scriptName("stegjs")
+    .scriptName("stegajs")
     .usage('$0 <cmd> [args]')
     .command({
 		command: 'alpha-format',
