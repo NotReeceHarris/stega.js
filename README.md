@@ -1,9 +1,9 @@
 <div align="center">
-<p> </p>
+  <p> </p>
   <img src="https://raw.githubusercontent.com/NotReeceHarris/stega.js/94c280fb053e0fda90cf7b52b7de0992264da49c/readme/stega-logo-background-rounded.svg" width="40%"/>
+  <p> </p>
+  <p>A Node-based Steganography Framework Seamlessly Integrating Steganography and Secure Cryptography. </p>
 </div>
-
-##
 
 <h2 align="center">
   <img src="https://img.shields.io/npm/v/stega.js?style=for-the-badge&amp;labelColor=%23313531&amp;color=%23f1e845" alt="npm">
