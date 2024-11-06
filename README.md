@@ -20,7 +20,7 @@ Steganography is the art and science of concealing information within seemingly 
 
 ## Encoding & Encryption
 
-Encoding and encryption are now there own things you must supply the encoder the encrypted data since the encoder **NO LONGER** encrypts the data only encodes the data in images.
+"Encoding and encryption are now separate processes. You must provide the encrypted data to the encoder, as it **no longer** handles encryption; it solely encodes the data within images.
 
 Algorithm | Supported Media | Rating | Docs
 --- | --- | --- | ---
