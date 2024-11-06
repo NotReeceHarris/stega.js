@@ -5,7 +5,6 @@
   <p>A Node-based Steganography Framework Seamlessly Integrating Steganography and Secure Cryptography. </p>
 </div>
 
-
 ```py
 # Download CLI globally
 npm i -g stega.js@latest
@@ -13,7 +12,9 @@ npm i -g stega.js@latest
 # Install module package
 npm i stega.js@latest
 ```
+
 ## What is stega.js
+
 Stega.js is a comprehensive steganography framework meticulously engineered to accommodate diverse steganography algorithms. Each algorithm undergoes rigorous testing and evaluation, receiving a performance rating on a scale of 0 to 100. It's important to note that these ratings pertain solely to the encoding aspect and do not reflect the encryption strength, as all encryption methods employed are thoroughly vetted for cryptographic security and compliance.
 
 Steganography is the art and science of concealing information within seemingly innocuous carriers, such as images, audio files, or text, in a way that the presence of the hidden data is not readily apparent to observers. Unlike cryptography, which focuses on securing the content of a message, steganography is concerned with ensuring the secrecy of the message itself. By subtly altering the carrier's data and making imperceptible changes, steganography allows confidential information to be transmitted without arousing suspicion. The hidden data is typically embedded within the carrier using various techniques, from modifying the least significant bits of binary data to exploiting imperceptible variations in media formats. Steganography finds applications in digital security, covert communication, and data protection, where the goal is to maintain confidentiality by keeping the message's existence concealed from unintended recipients.
@@ -24,7 +25,7 @@ Steganography is the art and science of concealing information within seemingly 
 
 Algorithm | Supported Media | Rating | Docs
 --- | --- | --- | ---
-alpha-channel | `PNG` | 🟢 7/10 | [wiki/8‐bit-alpha-channel](https://github.com/NotReeceHarris/stega.js/wiki/8%E2%80%90bit-alpha-channel)
+alpha-channel | `PNG` `TIFF` `WebP` | 🟢 7/10 | [wiki/8‐bit-alpha-channel](https://github.com/NotReeceHarris/stega.js/wiki/8%E2%80%90bit-alpha-channel)
 
 ## Licensing
 
